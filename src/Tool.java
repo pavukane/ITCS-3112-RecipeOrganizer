@@ -1,9 +1,11 @@
+import java.util.Random;
+
 public class Tool {
     private int toolID;
     private String description;
 
-    public Tool(int toolID, String description) {
-        this.toolID = toolID;
+    public Tool(String description) {
+        this.toolID = generateRandomID();
         this.description = description;
     }
 
@@ -25,5 +27,10 @@ public class Tool {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    private int generateRandomID() {
+        Random random = new Random();
+        return random.nextInt(1000); // Change the range as needed
     }
 }

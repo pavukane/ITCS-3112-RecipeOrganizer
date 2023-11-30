@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Recipe {
     private int recipeID;
@@ -8,8 +9,9 @@ public class Recipe {
     private List<Instruction> instructions;
     private List<Tool> tools;
 
-    public Recipe(int recipeID, String name) {
-        this.recipeID = recipeID;
+
+    public Recipe(String name) {
+        this.recipeID = generateRandomID();
         this.name = name;
         this.ingredients = new ArrayList<>();
         this.instructions = new ArrayList<>();
@@ -90,6 +92,11 @@ public class Recipe {
 
     public void setTools(List<Tool> tools) {
         this.tools = tools;
+    }
+
+    private int generateRandomID() {
+        Random random = new Random();
+        return random.nextInt(1000); // Change the range as needed
     }
     // Other recipe methods as needed
 }
