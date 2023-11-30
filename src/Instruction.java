@@ -10,4 +10,20 @@ public class Instruction {
     public void displayDescription() {
         System.out.println(description);
     }
+
+    public int getInstructionID() {
+        return instructionID;
+    }
+
+    public void setInstructionID(int instructionID) {
+        this.instructionID = instructionID;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

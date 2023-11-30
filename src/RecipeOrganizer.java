@@ -12,19 +12,31 @@ public class RecipeOrganizer {
         recipes.add(recipe);
     }
 
-    public void editRecipe(int index, Recipe recipe) {
-        if (index >= 0 && index < recipes.size()) {
-            recipes.set(index, recipe);
-        } else {
-            System.out.println("Invalid index");
+    public void editRecipe(int recipeId, Recipe updatedRecipe) {
+        boolean found = false;
+        for (int i=0;i<recipes.size();i++){
+            if (recipes.get(i).getRecipeID() == recipeId){
+                recipes.set(i, updatedRecipe);
+                found = true;
+                break;
+            }
+        }
+        if (!found){
+            System.out.println("No recipe with that ID");
         }
     }
 
-    public void deleteRecipe(int index) {
-        if (index >= 0 && index < recipes.size()) {
-            recipes.remove(index);
-        } else {
-            System.out.println("Invalid index");
+    public void deleteRecipe(int recipeId) {
+        boolean found = false;
+        for (int i=0;i<recipes.size();i++){
+            if (recipes.get(i).getRecipeID() == recipeId){
+                recipes.remove(i);
+                found = true;
+                break;
+            }
+        }
+        if (!found){
+            System.out.println("No recipe with that ID");
         }
     }
 
