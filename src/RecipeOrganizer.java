@@ -7,14 +7,24 @@ public class RecipeOrganizer {
 
     public RecipeOrganizer() {
         this.recipes = new ArrayList<>();
+        recipes.add(new Recipe("Sample Recipe A"));
+        recipes.add(new Recipe("Sample Recipe B"));
+        recipes.add(new Recipe("Sample Recipe C"));
     }
 
     public void addRecipe(Recipe recipe) {
         recipes.add(recipe);
     }
-
+    public boolean isRecipeIdExist(int recipeId){
+        for (int i=0;i<recipes.size();i++){
+            if (recipes.get(i).getRecipeID() == recipeId){
+                return true;
+            }
+        }
+        return false;
+    }
     public void editRecipe(int recipeId, Recipe updatedRecipe) {
-        boolean found = false;
+        boolean found = isRecipeIdExist(recipeId);
         for (int i=0;i<recipes.size();i++){
             if (recipes.get(i).getRecipeID() == recipeId){
                 recipes.set(i, updatedRecipe);
@@ -119,6 +129,7 @@ public class RecipeOrganizer {
                     System.out.println("Invalid choice. Please try again.");
             }
         }
+
         return newRecipe;
     }
 }

@@ -29,7 +29,10 @@ public class Main {
 
                     System.out.print("Enter the recipe ID to edit: ");
                     int editRecipeID = scanner.nextInt();
-
+                    if (!recipeOrganizer.isRecipeIdExist(editRecipeID)) {
+                        System.out.println("No recipe with that ID");
+                        break;
+                    }
                     Recipe updatedRecipe = recipeOrganizer.createNewRecipeFromUserInput(scanner);
                     recipeOrganizer.editRecipe(editRecipeID, updatedRecipe);
                     break;
