@@ -25,23 +25,23 @@ public class Main {
                     System.out.println("Recipe added successfully!");
                     break;
                 case 2:
-                    System.out.println("Current Recipes:");
-                    List<Recipe> currentRecipes = recipeOrganizer.getRecipes();
-                    for (int i = 0; i < currentRecipes.size(); i++) {
-                        System.out.println("ID: " + currentRecipes.get(i).getRecipeID() + " | Name: " + currentRecipes.get(i).getName());
-                    }
+                    recipeOrganizer.previewAllRecipes();
 
                     System.out.print("Enter the recipe ID to edit: ");
                     int editRecipeID = scanner.nextInt();
 
                     Recipe updatedRecipe = recipeOrganizer.createNewRecipeFromUserInput(scanner);
                     recipeOrganizer.editRecipe(editRecipeID, updatedRecipe);
-                    System.out.println("Recipe edited successfully!");
                     break;
                 case 3:
-                    // Delete Recipe
-                    // You can prompt the user for the index of the recipe to delete
-                    // Then delete the recipe by index using recipeOrganizer.deleteRecipe(index);
+                    // Display all current recipes' names and IDs
+                    recipeOrganizer.previewAllRecipes();
+
+                    System.out.print("Enter the recipe ID to delete: ");
+                    int deleteRecipeID = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline
+
+                    recipeOrganizer.deleteRecipe(deleteRecipeID);
                     break;
                 case 4:
                     // Show All Recipes

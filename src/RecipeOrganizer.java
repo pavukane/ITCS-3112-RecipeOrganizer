@@ -22,9 +22,8 @@ public class RecipeOrganizer {
                 break;
             }
         }
-        if (!found){
-            System.out.println("No recipe with that ID");
-        }
+        if (found) System.out.println("Recipe edited successfully!");
+        else System.out.println("No recipe with that ID");
     }
 
     public void deleteRecipe(int recipeId) {
@@ -36,9 +35,8 @@ public class RecipeOrganizer {
                 break;
             }
         }
-        if (!found){
-            System.out.println("No recipe with that ID");
-        }
+        if (found) System.out.println("Recipe deleted successfully!");
+        else System.out.println("No recipe with that ID");
     }
 
     public void displayAllRecipes() {
@@ -50,6 +48,13 @@ public class RecipeOrganizer {
             recipe.displayInstructions();
             System.out.println("=================================");
             // Display other recipe details as needed
+        }
+    }
+
+    public void previewAllRecipes(){
+        System.out.println("Current Recipes:");
+        for (int i = 0; i < recipes.size(); i++) {
+            System.out.println("ID: " + recipes.get(i).getRecipeID() + " | Name: " + recipes.get(i).getName());
         }
     }
 
