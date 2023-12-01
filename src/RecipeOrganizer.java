@@ -42,8 +42,13 @@ public class RecipeOrganizer {
 
     public void displayAllRecipes() {
         for (Recipe recipe : recipes) {
+            System.out.println("=================================");
+            System.out.println("Recipe name: " + recipe.getName());
+            System.out.println("Ingredients: ");
             recipe.displayIngredients();
+            System.out.println("Instructions: ");
             recipe.displayInstructions();
+            System.out.println("=================================");
             // Display other recipe details as needed
         }
     }

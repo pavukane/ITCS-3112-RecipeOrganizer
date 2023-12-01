@@ -26,6 +26,10 @@ public class Recipe {
         ingredients.remove(ingredient);
     }
 
+    public void addInstruction(Instruction instruction) {
+        instructions.add(instruction);
+    }
+
     public void addInstruction(int index, Instruction instruction) {
         instructions.add(index, instruction);
     }
