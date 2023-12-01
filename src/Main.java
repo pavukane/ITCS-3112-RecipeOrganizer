@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -5,8 +6,8 @@ public class Main {
         RecipeOrganizer recipeOrganizer = new RecipeOrganizer();
         Scanner scanner = new Scanner(System.in);
         int choice;
-
-        do {
+        boolean exit = false;
+        while (!exit){
             System.out.println("Recipe Organizer Menu:");
             System.out.println("1. Add Recipe");
             System.out.println("2. Edit Recipe");
@@ -19,66 +20,23 @@ public class Main {
             switch (choice) {
                 case 1:
                     // Add Recipe
-                    System.out.print("Enter recipe name: ");
-                    scanner.nextLine();
-                    String recipeName = scanner.nextLine();
-                    Recipe newRecipe = new Recipe(recipeName); // Hardcoded ID for demonstration
-
-                    boolean addIngredients = true;
-                    while (addIngredients) {
-                        System.out.println("Add Ingredient:");
-                        System.out.println("1. Add Ingredient");
-                        System.out.println("2. Finish Adding Ingredients");
-                        System.out.print("Select an option: ");
-                        int ingredientChoice = scanner.nextInt();
-                        scanner.nextLine(); // Consume newline
-
-                        switch (ingredientChoice) {
-                            case 1:
-                                System.out.print("Enter ingredient name: ");
-                                String ingredientName = scanner.nextLine();
-                                Ingredient ingredient = new Ingredient(ingredientName); // Hardcoded ID for demonstration
-                                newRecipe.addIngredient(ingredient);
-                                break;
-                            case 2:
-                                addIngredients = false;
-                                break;
-                            default:
-                                System.out.println("Invalid choice. Please try again.");
-                        }
-                    }
-
-                    boolean addInstructions = true;
-                    while (addInstructions) {
-                        System.out.println("Add Instruction:");
-                        System.out.println("1. Add Instruction");
-                        System.out.println("2. Finish Adding Instructions");
-                        System.out.print("Select an option: ");
-                        int instructionChoice = scanner.nextInt();
-                        scanner.nextLine(); // Consume newline
-
-                        switch (instructionChoice) {
-                            case 1:
-                                System.out.print("Enter instruction description: ");
-                                String instructionDesc = scanner.nextLine();
-                                Instruction instruction = new Instruction(instructionDesc); // Hardcoded ID for demonstration
-                                newRecipe.addInstruction(instruction);
-                                break;
-                            case 2:
-                                addInstructions = false;
-                                break;
-                            default:
-                                System.out.println("Invalid choice. Please try again.");
-                        }
-                    }
-
+                    Recipe newRecipe = recipeOrganizer.createNewRecipeFromUserInput(scanner);
                     recipeOrganizer.addRecipe(newRecipe);
                     System.out.println("Recipe added successfully!");
                     break;
                 case 2:
-                    // Edit Recipe
-                    // You can prompt the user for the index of the recipe to edit
-                    // Then retrieve the recipe by index using recipeOrganizer.editRecipe(index, newRecipe);
+                    System.out.println("Current Recipes:");
+                    List<Recipe> currentRecipes = recipeOrganizer.getRecipes();
+                    for (int i = 0; i < currentRecipes.size(); i++) {
+                        System.out.println("ID: " + currentRecipes.get(i).getRecipeID() + " | Name: " + currentRecipes.get(i).getName());
+                    }
+
+                    System.out.print("Enter the recipe ID to edit: ");
+                    int editRecipeID = scanner.nextInt();
+
+                    Recipe updatedRecipe = recipeOrganizer.createNewRecipeFromUserInput(scanner);
+                    recipeOrganizer.editRecipe(editRecipeID, updatedRecipe);
+                    System.out.println("Recipe edited successfully!");
                     break;
                 case 3:
                     // Delete Recipe
@@ -90,13 +48,14 @@ public class Main {
                     recipeOrganizer.displayAllRecipes();
                     break;
                 case 5:
+                    exit = true;
                     System.out.println("Exiting the program. Goodbye!");
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a valid option.");
                     break;
             }
-        } while (choice != 5);
+        }
 
         scanner.close();
     }

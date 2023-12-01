@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class RecipeOrganizer {
     private List<Recipe> recipes;
@@ -42,7 +43,6 @@ public class RecipeOrganizer {
 
     public void displayAllRecipes() {
         for (Recipe recipe : recipes) {
-            System.out.println("=================================");
             System.out.println("Recipe name: " + recipe.getName());
             System.out.println("Ingredients: ");
             recipe.displayIngredients();
@@ -51,5 +51,69 @@ public class RecipeOrganizer {
             System.out.println("=================================");
             // Display other recipe details as needed
         }
+    }
+
+    public List<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes = recipes;
+    }
+
+    public Recipe createNewRecipeFromUserInput(Scanner scanner){
+        System.out.print("Enter recipe name: ");
+        scanner.nextLine();
+        String recipeName = scanner.nextLine();
+        Recipe newRecipe = new Recipe(recipeName);
+
+        boolean addIngredients = true;
+        while (addIngredients) {
+            System.out.println("Add Ingredient:");
+            System.out.println("1. Add Ingredient");
+            System.out.println("2. Finish Adding Ingredients");
+            System.out.print("Select an option: ");
+            int ingredientChoice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (ingredientChoice) {
+                case 1:
+                    System.out.print("Enter ingredient name: ");
+                    String ingredientName = scanner.nextLine();
+                    Ingredient ingredient = new Ingredient(ingredientName);
+                    newRecipe.addIngredient(ingredient);
+                    break;
+                case 2:
+                    addIngredients = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+
+        boolean addInstructions = true;
+        while (addInstructions) {
+            System.out.println("Add Instruction:");
+            System.out.println("1. Add Instruction");
+            System.out.println("2. Finish Adding Instructions");
+            System.out.print("Select an option: ");
+            int instructionChoice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (instructionChoice) {
+                case 1:
+                    System.out.print("Enter instruction description: ");
+                    String instructionDesc = scanner.nextLine();
+                    Instruction instruction = new Instruction(instructionDesc);
+                    newRecipe.addInstruction(instruction);
+                    break;
+                case 2:
+                    addInstructions = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
+        return newRecipe;
     }
 }
